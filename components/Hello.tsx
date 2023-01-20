@@ -1,8 +1,26 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 
-const Cat = () => {
-  return <Text>Hello, I am your cat!</Text>;
+type CatProps = {
+  name: string;
 };
 
-export default Cat;
+const Cat = (props: CatProps) => {
+  return (
+    <View>
+      <Text>Hello, I am {props.name}!</Text>
+    </View>
+  );
+};
+
+const Cafe = () => {
+  return (
+    <View>
+      <Cat name="Maru" />
+      <Cat name="Jellylorum" />
+      <Cat name="Spot" />
+    </View>
+  );
+};
+
+export default Cafe;
