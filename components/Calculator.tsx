@@ -1,7 +1,5 @@
 import React from 'react';
-// import { StatusBar } from 'expo-status-bar"
-// import { StyleSheet, View, SafeAreaView } from 'react-native'
-import {StyleSheet, View, Text, Row, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 type CatProps = {
   value: string;
@@ -10,21 +8,28 @@ type CatProps = {
 const Button = (props: CatProps) => {
   return (
     <TouchableOpacity style={styles.btn}>
-      <Text>{props.value}</Text>
+      <Text style={styles.btnText}>{props.value}</Text>
     </TouchableOpacity>
   );
 };
 const ButtonOrange = (props: CatProps) => {
   return (
     <TouchableOpacity style={styles.btnOrange}>
-      <Text>{props.value}</Text>
+      <Text style={styles.btnText}>{props.value}</Text>
+    </TouchableOpacity>
+  );
+};
+const ButtonZero = (props: CatProps) => {
+  return (
+    <TouchableOpacity style={styles.btnZero}>
+      <Text style={styles.btnText}>{props.value}</Text>
     </TouchableOpacity>
   );
 };
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.fontNumber}>69,96</Text>
+      <Text style={styles.fontNumber}>69.69696</Text>
       <View style={styles.row}>
         <Button value="AC" />
         <Button value="+/-" />
@@ -50,7 +55,7 @@ export default function App() {
         <ButtonOrange value="+" />
       </View>
       <View style={styles.row}>
-        <Button value="0" />
+        <ButtonZero value="0" />
         <Button value="." />
         <ButtonOrange value="=" />
       </View>
@@ -65,16 +70,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   fontNumber: {
-    fontSize: 54,
+    fontSize: 80,
     color: '#fff',
+    textAlign: 'right',
   },
   row: {
     flexDirection: 'row',
   },
   btnText: {
-    color: '#fff',
-    fontSize: 25,
-    fontWeight: '500',
+    color: '#f2f0e9',
+    fontSize: 40,
+    fontWeight: '300',
   },
 
   btn: {
@@ -83,10 +89,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 100,
-    // borderColor: 'black',
-    margin: 0.12,
+    borderColor: 'black',
     borderStyle: 'solid',
     borderWidth: 0.2,
+    borderBottomWidth: 0,
+  },
+  btnZero: {
+    backgroundColor: '#b5b5b5',
+    flex: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 100,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    borderWidth: 0.2,
+    width: '50%',
+    borderBottomWidth: 0,
   },
   btnOrange: {
     backgroundColor: '#fc9d17',
@@ -94,9 +112,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 100,
-    // borderColor: 'black',
-    margin: 0.12,
+    borderColor: 'black',
     borderStyle: 'solid',
     borderWidth: 0.2,
+    borderBottomWidth: 0,
   },
 });
