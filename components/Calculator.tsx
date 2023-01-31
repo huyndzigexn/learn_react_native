@@ -3,61 +3,48 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 type CatProps = {
   value: string;
+  styles: any;
 };
-
 const Button = (props: CatProps) => {
   return (
-    <TouchableOpacity style={styles.btn}>
+    <TouchableOpacity style={[props.styles]}>
       <Text style={styles.btnText}>{props.value}</Text>
     </TouchableOpacity>
   );
 };
-const ButtonOrange = (props: CatProps) => {
-  return (
-    <TouchableOpacity style={styles.btnOrange}>
-      <Text style={styles.btnText}>{props.value}</Text>
-    </TouchableOpacity>
-  );
-};
-const ButtonZero = (props: CatProps) => {
-  return (
-    <TouchableOpacity style={styles.btnZero}>
-      <Text style={styles.btnText}>{props.value}</Text>
-    </TouchableOpacity>
-  );
-};
+
 export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.fontNumber}>69.69696</Text>
       <View style={styles.row}>
-        <Button value="AC" />
-        <Button value="+/-" />
-        <Button value="%" />
-        <ButtonOrange value="/" />
+        <Button value="AC" styles={styles.btn} />
+        <Button value="+/-" styles={styles.btn} />
+        <Button value="%" styles={styles.btn} />
+        <Button value="/" styles={[styles.btn, styles.btnOrange]} />
       </View>
       <View style={styles.row}>
-        <Button value="7" />
-        <Button value="8" />
-        <Button value="9" />
-        <ButtonOrange value="x" />
+        <Button value="7" styles={styles.btn} />
+        <Button value="8" styles={styles.btn} />
+        <Button value="9" styles={styles.btn} />
+        <Button value="x" styles={[styles.btn, styles.btnOrange]} />
       </View>
       <View style={styles.row}>
-        <Button value="4" />
-        <Button value="5" />
-        <Button value="6" />
-        <ButtonOrange value="-" />
+        <Button value="4" styles={styles.btn} />
+        <Button value="5" styles={styles.btn} />
+        <Button value="6" styles={styles.btn} />
+        <Button value="-" styles={[styles.btn, styles.btnOrange]} />
       </View>
       <View style={styles.row}>
-        <Button value="1" />
-        <Button value="2" />
-        <Button value="3" />
-        <ButtonOrange value="+" />
+        <Button value="1" styles={styles.btn} />
+        <Button value="2" styles={styles.btn} />
+        <Button value="3" styles={styles.btn} />
+        <Button value="+" styles={[styles.btn, styles.btnOrange]} />
       </View>
       <View style={styles.row}>
-        <ButtonZero value="0" />
-        <Button value="." />
-        <ButtonOrange value="=" />
+        <Button value="0" styles={[styles.btn, styles.btnZero]} />
+        <Button value="." styles={styles.btn} />
+        <Button value="=" styles={[styles.btn, styles.btnOrange]} />
       </View>
     </View>
   );
@@ -95,26 +82,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   btnZero: {
-    backgroundColor: '#b5b5b5',
     flex: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 100,
-    borderColor: 'black',
-    borderStyle: 'solid',
-    borderWidth: 0.2,
     width: '50%',
-    borderBottomWidth: 0,
   },
   btnOrange: {
     backgroundColor: '#fc9d17',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 100,
-    borderColor: 'black',
-    borderStyle: 'solid',
-    borderWidth: 0.2,
-    borderBottomWidth: 0,
   },
 });
