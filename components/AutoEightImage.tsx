@@ -63,59 +63,92 @@
 //   },
 // });
 import React, {useState, useEffect, useRef} from 'react';
-import {View, Image, StyleSheet} from 'react-native';
-
+import {View, Image, StyleSheet, ScrollView, Dimensions} from 'react-native';
+const windowWidth = Dimensions.get('window').width / 2;
+const windowHeight = Dimensions.get('window').height / 2;
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 50,
-  },
+  // container: {
+  //   flexDirection: 'row',
+  //   paddingTop: 50,
+  // },
   tinyLogo: {
-    width: 50,
-    height: 50,
+    width: windowWidth,
+    height: windowHeight,
   },
   logo: {
     width: 66,
     height: 58,
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+  },
+  item: {
+    width: '50%',
   },
 });
 
 export default DisplayAnImage = () => {
   const [currentImage, setCurrentImage] = useState('');
   const [loading, setLoading] = useState(true);
+  const intervalId = useRef<number>();
+  const [arrayImage, setArrayImage] = useState<string[]>([]);
 
   const url = 'https://dog.ceo/api/breeds/image/random';
 
   const count = useRef(0);
+  const xx = count.current > 7;
   useEffect(() => {
-    let interval = setInterval(() => {
-      if (count.current < 3) {
-        fetch(url)
-          .then(response => response.json())
-          .then(json => {
-            console.log({json});
-            count.current = count.current + 1;
-            console.log(count.current);
-          })
-          .catch(error => console.log(error))
-          .finally(() => setLoading(false));
-      } else {
-        myStop();
+    console.log('runnnnnnnnnnn useEffect');
+
+    if (xx) {
+      if (intervalId.current) {
+        console.log('clear intervalllllllllllll');
+        clearInterval(intervalId.current);
       }
-    }, 2000);
-    let myStop = () => {
-      clearInterval(interval);
-    };
+      return;
+    }
+    console.log('create intervalllllllllllll');
+    intervalId.current = setInterval(() => {
+      fetch(url)
+        .then(response => response.json())
+        .then(json => {
+          // console.log({json});
+          count.current = count.current + 1;
+          // console.log(count.current);
+          setArrayImage(currentState => {
+            return [...currentState, json.message];
+          });
+          // setArrayImage([...arrayImage, json.message]);
+        })
+        .catch(error => console.log(error))
+        .finally(() => setLoading(false));
+    }, 100);
+
     console.log('count.current' + count.current);
-  }, [count]);
+  }, [xx]);
+  console.log(arrayImage);
   return (
-    <View style={styles.container}>
-      {/* <Image
-        style={styles.logo}
-        source={{
-          // uri: 'https://www.w3schools.com/html/pic_trulli.jpg',
-          uri: {currentImage},
-        }}
-      /> */}
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        {arrayImage.map(image => {
+          return (
+            <View style={styles.item} key={image}>
+              <Image
+                key={image}
+                style={styles.tinyLogo}
+                source={{
+                  uri: image,
+                }}
+              />
+            </View>
+          );
+        })}
+        <View />
+        {/* {listItems} */}
+      </View>
+    </ScrollView>
   );
 };
