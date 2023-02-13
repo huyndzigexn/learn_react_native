@@ -1,29 +1,25 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {View, Image, StyleSheet, ScrollView, Dimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width / 2;
-const windowHeight = Dimensions.get('window').height / 2;
 const styles = StyleSheet.create({
   tinyLogo: {
     width: windowWidth,
-    height: windowHeight,
-  },
-  logo: {
-    width: 66,
-    height: 58,
+    height: windowWidth,
   },
   container: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    backgroundColor: 'black',
   },
   item: {
-    width: '50%',
+    width: '47%',
+    margin: 3,
   },
 });
 
 export default DisplayAnImage = () => {
-  const [loading, setLoading] = useState(true);
   const intervalId = useRef<number>();
   const [arrayImage, setArrayImage] = useState<string[]>([]);
 
