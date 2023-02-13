@@ -7,6 +7,8 @@ import {
   Dimensions,
   Text,
 } from 'react-native';
+import axios from 'axios';
+
 const windowWidth = Dimensions.get('window').width / 3;
 const styles = StyleSheet.create({
   tinyLogo: {
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DisplayAnImage = () => {
+export default () => {
   const intervalId = useRef<number>();
   const [arrayImage, setArrayImage] = useState<string[]>([]);
   const [seconds, setSeconds] = useState(10);
@@ -48,26 +50,25 @@ export default DisplayAnImage = () => {
       return;
     }
     const getDog = async () => {
-      let response = await fetch(url);
-      let data = await response.json();
-      return data.message;
+      let response = await axios.get(url);
+      return response.data.message;
     };
     const threeDogs = () => {
       return Promise.all([getDog(), getDog(), getDog()]);
     };
     intervalId.current = setInterval(() => {
-      setSeconds(seconds => {
+      setSeconds(countDownSeconds => {
         console.log(count.current);
-        if (seconds === 0) {
+        if (countDownSeconds === 0) {
           threeDogs().then(json => {
             setArrayImage(currentState => {
               count.current += 1;
               return [...currentState, ...json];
             });
           });
-          return count.current === 3 ? 'end' : 10;
+          return count.current === 3 ? 0 : 10;
         }
-        return seconds - 1;
+        return countDownSeconds - 1;
       });
     }, 1000);
   }, [stop]);

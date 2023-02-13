@@ -1,5 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {View, Image, StyleSheet, ScrollView, Dimensions} from 'react-native';
+import axios from 'axios';
+
 const windowWidth = Dimensions.get('window').width / 2;
 const styles = StyleSheet.create({
   tinyLogo: {
@@ -19,17 +21,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DisplayAnImage = () => {
+export default () => {
   const intervalId = useRef<number>();
   const [arrayImage, setArrayImage] = useState<string[]>([]);
 
   const url = 'https://dog.ceo/api/breeds/image/random';
 
   const count = useRef(0);
-  const xx = count.current > 7;
+  const stop = count.current > 7;
   useEffect(() => {
     console.log('runnnnnnnnnnn useEffect');
-    if (xx) {
+    if (stop) {
       if (intervalId.current) {
         console.log('clear intervalllllllllllll');
         clearInterval(intervalId.current);
@@ -38,22 +40,21 @@ export default DisplayAnImage = () => {
     }
     console.log('create intervalllllllllllll');
     intervalId.current = setInterval(() => {
-      fetch(url)
-        .then(response => response.json())
+      axios
+        .get(url)
         .then(json => {
           // console.log({json});
           count.current = count.current + 1;
           // console.log(count.current);
           setArrayImage(currentState => {
-            return [...currentState, json.message];
+            return [...currentState, json.data.message];
           });
           // setArrayImage([...arrayImage, json.message]);
         })
-        .catch(error => console.log(error))
-        .finally(() => setLoading(false));
-    }, 10000);
+        .catch(error => console.log(error));
+    }, 1000);
     console.log('count.current' + count.current);
-  }, [xx]);
+  }, [stop]);
 
   console.log(arrayImage);
   return (
