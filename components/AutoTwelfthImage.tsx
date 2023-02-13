@@ -66,7 +66,7 @@ export default () => {
               return [...currentState, ...json];
             });
           });
-          return count.current === 3 ? 0 : 10;
+          return count.current === 2 ? 0 : 10;
         }
         return countDownSeconds - 1;
       });
