@@ -1,15 +1,6 @@
 // In App.js in a new project
 
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  Text,
-  Image,
-} from 'react-native';
-// import RNBootSplash from 'react-native-bootsplash';
+import React from 'react';
 import SignIn from './screen/SignIn';
 import DetailsScreen from './screen/Details';
 import Loading from './screen/Loading';

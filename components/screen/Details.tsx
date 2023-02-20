@@ -20,6 +20,7 @@ const DetailsScreen = () => {
   const clearData = async () => {
     try {
       await AsyncStorage.setItem('storageImage', '');
+      console.warn('!!! TOKEN was cleared !!!');
     } catch (e) {
       console.log(e);
     }
