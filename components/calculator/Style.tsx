@@ -41,6 +41,38 @@ const styles = StyleSheet.create({
   btnGray: {
     backgroundColor: 'gray',
   },
+  button: {
+    height: 44,
+    marginTop: 20,
+    borderRadius: 4,
+    backgroundColor: 'cyan',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  textButton: {
+    padding: 10,
+    paddingBottom: 0,
+  },
+  containerx: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: '#a2a2a2',
+  },
+  imageContainer: {
+    width: '80%',
+    height: '50%',
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: '#a2a2a2',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
 });
 
 export default styles;
